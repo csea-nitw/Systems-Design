@@ -1,0 +1,18 @@
+/*
+
+SERVER: 
+divas_jindal@divas-jindal:/mnt/c/Users/divas/Documents/Ubuntu/System Design/storage$ node server.js
+Listening on port 3001!
+
+// Close server and recheck what data is there, which eventually explains storing data on memory and storing data on disk
+
+CLIENT:
+divas_jindal@divas-jindal:/mnt/c/Users/divas$ curl localhost:3001/memory/foo --header 'Content-Type: application/json' --data '{"data": "This is some data in memory."}'
+divas_jindal@divas-jindal:/mnt/c/Users/divas$ curl localhost:3001/memory/foo -w '\n'
+This is some data in memory.
+
+divas_jindal@divas-jindal:/mnt/c/Users/divas$ curl localhost:3001/disk/foo --header 'Content-Type: application/json' --data '{"data": "This is some data in disk."}'
+divas_jindal@divas-jindal:/mnt/c/Users/divas$ curl localhost:3001/disk/foo -w '\n'
+This is some data in disk.
+
+*/

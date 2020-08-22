@@ -1,0 +1,46 @@
+/*
+
+
+SUBSCRIBER 1 (NEWS ALERTS):
+divas_jindal@divas-jindal:/mnt/c/Users/divas/Documents/Ubuntu/System Design/publish_subscribe_pattern$ TOPIC_ID=news_alerts node subscriber.js
+> NEWS_CHANNEL: 1 New News Alert
+> NEWS_CHANNEL: 2 New News Alert
+> NEWS_CHANNEL: 3 New News Alert
+> NEWS_CHANNEL: 4 New News Alert
+
+SUBSCRIBER 2 (STOCK PRICES):
+divas_jindal@divas-jindal:/mnt/c/Users/divas/Documents/Ubuntu/System Design/publish_subscribe_pattern$ TOPIC_ID=stock_prices node subscriber.js
+> STOCK_BROKER: 1 New Stock Price
+> STOCK_BROKER: 2 New Stock Price
+> STOCK_BROKER: 3 New Stock Price
+> STOCK_BROKER: 4 New Stock Price
+> STOCK_BROKER: 5 New Stock Price
+> STOCK_BROKER: 6 New Stock Price
+
+SUBSCRIBER 3 (STOCK PRICES):
+divas_jindal@divas-jindal:/mnt/c/Users/divas/Documents/Ubuntu/System Design/publish_subscribe_pattern$ TOPIC_ID=stock_prices node subscriber.js
+> STOCK_BROKER: 1 New Stock Price
+> STOCK_BROKER: 2 New Stock Price
+> STOCK_BROKER: 3 New Stock Price
+> STOCK_BROKER: 4 New Stock Price
+> STOCK_BROKER: 5 New Stock Price
+> STOCK_BROKER: 6 New Stock Price
+> STOCK_BROKER: 7 New Stock Price
+
+
+PUBLISHER STOCK PRICES(Stock Broker):
+divas_jindal@divas-jindal:/mnt/c/Users/divas/Documents/Ubuntu/System Design/publish_subscribe_pattern$
+ (for i in `seq 1 1000`; do sleep 1; echo $i New Stock Price; done) | NAME=STOCK_BROKER TOPIC_ID=stock_prices node publisher.js
+
+
+PUBLISHER STOCK PRICES(Stock Broker):
+divas_jindal@divas-jindal:/mnt/c/Users/divas/Documents/Ubuntu/System Design/publish_subscribe_pattern$
+ (for i in `seq 1 1000`; do sleep 1; echo $i New NEWS ALERT; done) | NAME=NEWS_CHANNEL TOPIC_ID=news_alerts node publisher.js
+
+
+SERVER:
+divas_jindal@divas-jindal:/mnt/c/Users/divas/Documents/Ubuntu/System Design/publish_subscribe_pattern$ node server.js
+Listening on port 3001.
+
+
+*/
