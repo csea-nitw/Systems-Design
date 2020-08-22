@@ -1,0 +1,2 @@
+over_10_seconds 97
+under_10_seconds 105

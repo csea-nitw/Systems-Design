@@ -1,0 +1,52 @@
+/*
+
+//Based on weight give to the servers it will redirect the requests accordingly, also acting as a reverse proxy
+
+
+SERVER1 (PORT=3000):
+divas_jindal@divas-jindal:/mnt/c/Users/divas/Documents/Ubuntu/System Design/load _balancer$ PORT=3000 node server.js
+Listening on port 3000 !
+{ 'divas-jindal': 'true',
+  host: 'nodejs-backend_load_balancer',
+  connection: 'close',
+  'user-agent': 'curl/7.58.0',
+  accept: '*/*' }
+{ 'divas-jindal': 'true',
+  host: 'nodejs-backend_load_balancer',
+  connection: 'close',
+  'user-agent': 'curl/7.58.0',
+  accept: '*/*' }
+{ 'divas-jindal': 'true',
+  host: 'nodejs-backend_load_balancer',
+  connection: 'close',
+  'user-agent': 'curl/7.58.0',
+  accept: '*/*' }
+{ 'divas-jindal': 'true',
+  host: 'nodejs-backend_load_balancer',
+  connection: 'close',
+  'user-agent': 'curl/7.58.0',
+  accept: '*/*' }
+
+SERVER2 (PORT=3001):
+divas_jindal@divas-jindal:/mnt/c/Users/divas/Documents/Ubuntu/System Design/load _balancer$ PORT=3001 node server.js
+Listening on port 3001 !
+{ 'divas-jindal': 'true',
+  host: 'nodejs-backend_load_balancer',
+  connection: 'close',
+  'user-agent': 'curl/7.58.0',
+  accept: '*/*' }
+
+
+CLIENT:
+divas_jindal@divas-jindal:/mnt/c/Users/divas/Documents/Ubuntu/System Design/proxies$ curl localhost:8081/hello
+Hello from port3000.
+divas_jindal@divas-jindal:/mnt/c/Users/divas/Documents/Ubuntu/System Design/proxies$ curl localhost:8081/hello
+Hello from port3000.
+divas_jindal@divas-jindal:/mnt/c/Users/divas/Documents/Ubuntu/System Design/proxies$ curl localhost:8081/hello
+Hello from port3000.
+divas_jindal@divas-jindal:/mnt/c/Users/divas/Documents/Ubuntu/System Design/proxies$ curl localhost:8081/hello
+Hello from port3001.
+divas_jindal@divas-jindal:/mnt/c/Users/divas/Documents/Ubuntu/System Design/proxies$ curl localhost:8081/hello
+Hello from port3000.
+
+*/

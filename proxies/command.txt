@@ -1,0 +1,32 @@
+/*
+
+SERVER:
+divas_jindal@divas-jindal:/mnt/c/Users/divas/Documents/Ubuntu/System Design/proxies$ node server.js
+Listening  on port 3000!
+{ host: 'localhost:3000',
+  'user-agent': 'curl/7.58.0',
+  accept: '*/*' }
+{ 'divas-jindal': 'true',
+  host: 'nodejs-backend_load_balancer',
+  connection: 'close',
+  'user-agent': 'curl/7.58.0',
+  accept: '*/*' }
+
+
+
+CLIENT:
+divas_jindal@divas-jindal:/mnt/c/Users/divas$ curl localhost:3000/hello
+Hello.
+//Before running nginx server
+divas_jindal@divas-jindal:/mnt/c/Users/divas$ curl localhost:8081/hello
+curl: (7) Failed to connect to localhost port 8081: Connection refused
+divas_jindal@divas-jindal:/mnt/c/Users/divas$ sudo service nginx start
+[sudo] password for divas_jindal:
+ * Starting nginx nginx                                                                                          [ OK ]
+divas_jindal@divas-jindal:/mnt/c/Users/divas$ sudo service nginx status
+ * nginx is running
+//After running nginx srver
+divas_jindal@divas-jindal:/mnt/c/Users/divas$ curl localhost:8081/hello
+Hello.
+
+*/

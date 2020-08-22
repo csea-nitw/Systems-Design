@@ -1,0 +1,69 @@
+/*
+
+# SITUATION 1
+
+
+->ServerSet1 and ServerSet2 is shown as in the situation such that some server dies(server5).
+
+divas_jindal@divas-jindal:/mnt/c/Users/divas/Documents/Ubuntu/System Design/hashing$ node hashing_example.js
+Simple Hashing Strategy!
+username0: server2 => server0 | equal: false
+username1: server3 => server1 | equal: false
+username2: server4 => server2 | equal: false
+username3: server5 => server3 | equal: false
+username4: server0 => server4 | equal: false
+username5: server1 => server0 | equal: false
+username6: server2 => server1 | equal: false
+username7: server3 => server2 | equal: false
+username8: server4 => server3 | equal: false
+username9: server5 => server4 | equal: false
+Simple Rendezvous Strategy!
+username0: server5 => server4 | equal: false
+username1: server4 => server4 | equal: true
+username2: server2 => server2 | equal: true
+username3: server1 => server1 | equal: true
+username4: server0 => server0 | equal: true
+username5: server5 => server4 | equal: false
+username6: server4 => server4 | equal: true
+username7: server3 => server3 | equal: true
+username8: server1 => server1 | equal: true
+username9: server0 => server0 | equal: true
+
+// In Simple Hashing almost all the mapped servers are different after a server 5 dies. Will miss a bunch of cache hits, if a server dies.
+// In Rendezvous Hashing only the servers with top most priority of server5, are mapped to the new server, which is the second top most prioriy/second compute score for the username.
+
+
+
+# SITUATION 2
+
+->ServerSet1 and ServerSet2 is shown as in the situation such that new servers 6,7,8,9 & 10 have been added to the system.
+
+divas_jindal@divas-jindal:/mnt/c/Users/divas/Documents/Ubuntu/System Design/hashing$ node hashing_example.js
+Simple Hashing Strategy!
+username0: server2 => server5 | equal: false
+username1: server3 => server6 | equal: false
+username2: server4 => server7 | equal: false
+username3: server5 => server8 | equal: false
+username4: server0 => server9 | equal: false
+username5: server1 => server10 | equal: false
+username6: server2 => server0 | equal: false
+username7: server3 => server1 | equal: false
+username8: server4 => server2 | equal: false
+username9: server5 => server3 | equal: false
+Simple Rendezvous Strategy!
+username0: server5 => server5 | equal: true
+username1: server4 => server4 | equal: true
+username2: server2 => server9 | equal: false
+username3: server1 => server1 | equal: true
+username4: server0 => server0 | equal: true
+username5: server5 => server5 | equal: true
+username6: server4 => server4 | equal: true
+username7: server3 => server3 | equal: true
+username8: server1 => server8 | equal: false
+username9: server0 => server0 | equal: true
+divas_jindal@divas-jindal:/mnt/c/Users/divas/Documents/Ubuntu/System Design/hashing$
+
+// In Simple Hashing almost all the mapped servers are different after a server 6 is added. Will miss a bunch of cache hits, if a server is being added in a system..
+// Only few mappings get affected
+
+*/
