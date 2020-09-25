@@ -1,0 +1,8 @@
+version: "3.8"
+
+services:
+
+  hashing:
+    image: marcellodesales/algoexpert-systems-design-hashing
+    build:
+      context: ./hashing
