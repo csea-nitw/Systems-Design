@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+
+  server:
+    build: .
+    image: marcellodesales/systemsexpert-kvp-server
+    ports:
+      - "3001:3001"
+    environment:
+      - "REDIS_HOST=redis"
+      - "REDIS_PORT=6379"
+
+  redis:
+    image: "redis:alpine"
+

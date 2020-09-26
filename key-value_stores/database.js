@@ -3,7 +3,8 @@ const databse = {
 };
 
 module.exports.get = (key, callback) => {
+    console.log("Waiting 3s to fulfill request...")
     setTimeout(() => {
         callback(databse[key]);
-  },3000);
+  }, 3000);
 };
