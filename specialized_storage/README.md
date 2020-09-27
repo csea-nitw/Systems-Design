@@ -1,7 +1,12 @@
 # Specialized Storage
 
 * Different storage systems for different purposes
-* Blob-store, GraphDB, Spatial
+* Blob-store, Graph Database, Timeseries Database, Spatial
+
+# InfluxDB
+
+* An example of a distributed lock with Redis and InfluxDB
+  * https://github.com/comsysto/redis-locks-with-grafana
 
 # GraphDB
 
