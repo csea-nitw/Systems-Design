@@ -1,0 +1,16 @@
+{
+  "name": "key-value-store-algo-designexpert",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "db": "node aedb.js",
+    "proxy": "node aedb_proxy.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "axios": "^0.20.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
