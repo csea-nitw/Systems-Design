@@ -1,0 +1,78 @@
+version: '3.8'
+
+#
+# docker-compose-etcd.yaml
+#   Override compose file for performing service registration via Etcd
+#
+services:
+
+  # Etcd for our service registry
+  server1:
+    image: marcellodesales/systemsexpert-leader-election
+    # build:
+    #   context: .
+    #   args:
+    #     - HTTP_PROXY
+    #     - http_proxy
+    #     - HTTPS_PROXY
+    #     - https_proxy
+    # https://stackoverflow.com/questions/52619154/docker-compose-hangs-after-attaching -u parameter to flush python print always
+    # https://stackoverflow.com/questions/51362213/docker-compose-not-printing-stdout-in-python-app/51362214#51362214
+    command: ["/wait-for-it.sh", "etcd_server:2378", "--", "python", "-u", "/app/leader_election.py", "server1"]
+    restart: always
+    environment:
+      ETCD_HOST: etcd_server
+      ETCD_PORT: 2378
+    volumes:
+      - "./wait-for-it.sh:/wait-for-it.sh"
+    networks:
+      - etcd
+
+  # Etcd for our service registry
+  server2:
+    image: marcellodesales/systemsexpert-leader-election
+    # build:
+    #   context: .
+    #   args:
+    #     - HTTP_PROXY
+    #     - http_proxy
+    #     - HTTPS_PROXY
+    #     - https_proxy
+    # https://stackoverflow.com/questions/52619154/docker-compose-hangs-after-attaching -u parameter to flush python print always
+    # https://stackoverflow.com/questions/51362213/docker-compose-not-printing-stdout-in-python-app/51362214#51362214
+    command: ["/wait-for-it.sh", "etcd_server:2378", "--", "python", "-u", "/app/leader_election.py", "server2"]
+    restart: always
+    environment:
+      ETCD_HOST: etcd_server
+      ETCD_PORT: 2378
+    volumes:
+      - "./wait-for-it.sh:/wait-for-it.sh"
+    networks:
+      - etcd
+
+  # Etcd for our service registry
+  server3:
+    image: marcellodesales/systemsexpert-leader-election
+    # build:
+    #   context: .
+    #   args:
+    #     - HTTP_PROXY
+    #     - http_proxy
+    #     - HTTPS_PROXY
+    #     - https_proxy
+    # https://stackoverflow.com/questions/52619154/docker-compose-hangs-after-attaching -u parameter to flush python print always
+    # https://stackoverflow.com/questions/51362213/docker-compose-not-printing-stdout-in-python-app/51362214#51362214
+    command: ["/wait-for-it.sh", "etcd_server:2378", "--", "python", "-u", "/app/leader_election.py", "server3"]
+    restart: always
+    environment:
+      ETCD_HOST: etcd_server
+      ETCD_PORT: 2378
+    volumes:
+      - "./wait-for-it.sh:/wait-for-it.sh"
+    networks:
+      - etcd
+
+networks:
+  etcd:
+    external:
+      name: etcd
