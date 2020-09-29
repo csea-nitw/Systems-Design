@@ -10,9 +10,9 @@ services:
       - "7474:7474"  # Go to http://localhost:7474/browser/ after bootstrapping
       - "7687:7687"
     volumes:
-      - ./neo4j-runtime/data:/data"
-      - ./neo4j-runtime/logs:/logs"
-      - ./neo4j-runtime/import:/var/lib/neo4j/import"
-      - ./neo4j-runtime/plugins:/plugins"
+      - ./neo4j-runtime/data:/data
+      - ./neo4j-runtime/logs:/logs
+      - ./neo4j-runtime/import:/var/lib/neo4j/import
+      - ./neo4j-runtime/plugins:/plugins
       # https://github.com/marcellodesales/neo4j-with-cypher-seed-docker#setup
       - ./cypher_query.cql:/cyphers/interviews.cql

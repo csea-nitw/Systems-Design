@@ -6,8 +6,7 @@ const redis = require('redis').createClient({
   port      : process.env.REDIS_PORT, // The port number to connect to.
   host      : process.env.REDIS_HOST, // The hostname of the database you are connecting to.
   // password  : 'redispassword', // The password for redis database.
-}
-);
+});
 
 const app = express();
 
