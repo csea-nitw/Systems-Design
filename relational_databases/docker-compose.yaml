@@ -1,0 +1,32 @@
+version: "3.8"
+
+# Client CLI command-line
+# docker run -ti --network data morzzz007/pgcli postgresql://rick:picle@postgres:5432/algoexpert-banking
+services:
+  postgres:
+    image: postgres:12
+    restart: unless-stopped
+    volumes:
+      - ./initdb.sh:/docker-entrypoint-initdb.d/initdb.sh
+      - ./pg-data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=rick
+      - POSTGRES_PASSWORD=pickle
+      - POSTGRES_DB=algoexpert-banking
+
+  pg_client:
+    image: marcellodesales/postgres-client
+    build:
+      context: .
+      dockerfile: "Dockerfile.client"
+    entrypoint: /bin/bash
+    command: ["/wait-for-it.sh", "postgres:5432", "--", "psql", "postgresql://rick:pickle@postgres:5432/algoexpert-banking", "-c select * from payments"]
+    restart: on-failure
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./wait-for-postgres.sh:/wait-for-it.sh
+
+networks:
+  default:
+    name: data-layer

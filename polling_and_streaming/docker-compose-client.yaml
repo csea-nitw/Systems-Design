@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+
+  chat_client:
+    build: .
+    image: marcellodesales/systemsexpert-polling-streaming
+    command: run client
+    stdin_open: true
+    tty: true
+    environment:
+      MODE: ${MODE:-poll}
+      NAME: ${USERNAME:-marcello}
+      WS_SERVER_HOST_PORT: chat_server:3001
+    networks:
+      - streaming
+
+networks:
+  streaming:
+    external:
+      name: streaming

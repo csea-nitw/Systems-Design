@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  client:
+    image: marcellodesales/postgres-client
+    build: .
+    entrypoint: /bin/bash
+    restart: unless-stopped
+    command: ["/wait-for-it.sh", "postgres:5432", "--", "psql", "postgresql://rick:pickle@postgres:5432/algoexpert-banking", "-c select * from payments"]
+    stdin_open: true
+    restart: on-failure
+    tty: true
+    volumes:
+      - ./wait-for-postgres.sh:/wait-for-it.sh
+
+networks:
+  default:
+    external:
+      name: data-layer

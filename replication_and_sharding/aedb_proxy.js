@@ -1,7 +1,7 @@
 const axios = require('axios');
 const express = require('express');
 
-const SHARD_ADDRESSES = ['http://localhost:3000', 'http://localhost:3001'];
+const SHARD_ADDRESSES = process.env.SHARD_ADDRESSES.replace(" ", "").trim().split(",")
 const SHARD_COUNT = SHARD_ADDRESSES.length;
 
 const app = express();

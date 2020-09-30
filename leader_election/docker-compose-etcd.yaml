@@ -1,0 +1,22 @@
+version: '3'
+
+#
+# docker-compose-etcd.yaml
+#   Override compose file for performing service registration via Etcd
+# Clustered: https://github.com/sorintlab/stolon/blob/master/examples/swarm/docker-compose-etcd.yml
+# Docs: https://help.compose.com/docs/etcd-using-etcd3-features#leases
+services:
+  # Etcd for our service registry
+  etcd_server:
+    image: quay.io/coreos/etcd:v3.4.13
+    # https://github.com/etcd-io/etcd/issues/10662
+    command: etcd --initial-cluster-state new --advertise-client-urls=http://etcd_server:2378 --listen-client-urls=http://0.0.0.0:2378 --debug
+    ports:
+      - "2378:2378"
+    networks:
+      - etcd
+
+networks:
+  etcd:
+    driver: bridge
+    name: etcd

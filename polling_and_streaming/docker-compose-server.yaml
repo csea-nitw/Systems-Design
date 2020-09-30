@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+
+  chat_server:
+    build: .
+    image: marcellodesales/systemsexpert-polling-streaming
+    command: run server
+    ports:
+      - "3001:3001"
+    networks:
+      - streaming
+
+networks:
+  streaming:
+    name: streaming

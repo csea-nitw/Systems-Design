@@ -23,7 +23,7 @@ function displayMessage(message) {
     displayMessages[message.id] = true;
 }
 
-async function getAndDisplayMessages() {   
+async function getAndDisplayMessages() {
     const messages = await messagingAPI.getMessages();
 
     for (const message of messages) {
@@ -51,7 +51,7 @@ if(process.env.MODE === 'poll') {
     getAndDisplayMessages();
     pollMessages();
 } else if (process.env.MODE === 'stream') {
-    // when you join chat room first it will get all the messages and then start streaming   
+    // when you join chat room first it will get all the messages and then start streaming
     getAndDisplayMessages();
     streamMessages();
 }

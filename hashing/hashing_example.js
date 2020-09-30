@@ -50,9 +50,9 @@ function pickServerSimple(username, servers) {
 function pickServerRendezvous(username, servers) {
     let maxServer = null;
     let maxScore = null;
-    for(const server of servers) {
+    for (const server of servers) {
         const score = utils.computeScore(username, server);
-        if(maxScore == null || score>maxScore) {
+        if (maxScore == null || score > maxScore) {
             maxScore = score;
             maxServer = server;
         }

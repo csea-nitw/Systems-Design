@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+
+  aedb_0:
+    build: .
+    image: marcellodesales/systemsexpert-sharding-db
+    command: run db
+    ports:
+      - "3000:3000"
+    environment:
+      - "DATA_DIR=/aedb/shards/aedb_data_0"
+      - "PORT=3000"
+    volumes:
+      - ./data/aedb_data_0:/aedb/shards/aedb_data_0
+
+  aedb_1:
+    build: .
+    image: marcellodesales/systemsexpert-sharding-db
+    command: run db
+    ports:
+      - "3001:3001"
+    environment:
+      - "DATA_DIR=/aedb/shards/aedb_data_1"
+      - "PORT=3001"
+    volumes:
+      - ./data/aedb_data_1:/aedb/shards/aedb_data_1
+
+  reverse_proxy:
+    build: .
+    image: marcellodesales/systemsexpert-sharding-db
+    command: run proxy
+    ports:
+      - "8000:8000"
+    environment:
+      - "SHARD_ADDRESSES=http://aedb_0:3000, http://aedb_1:3001"

@@ -4,7 +4,7 @@ const expressWs= require('express-ws');
 const app = express();
 expressWs(app);
 
-const messages = [{id: 0, text: 'Welcome', username: 'Chat Room'}];
+const messages = [{id: 0, text: 'Welcome user', username: 'chat-room'}];
 const sockets = [];
 
 app.use(express.json());
@@ -14,12 +14,14 @@ app.listen(3001, () => {
 });
 
 app.get('/messages',(req, res) => {
+    console.log("Current messages: " + JSON.stringify(messages))
     res.json(messages);
 });
 
 app.post('/messages', (req, res) => {
     //pshing message in message db
     const message = req.body;
+    console.log("Received new message: " + JSON.stringify(message))
     messages.push(message);
 
     //sending message to every client
@@ -29,7 +31,8 @@ app.post('/messages', (req, res) => {
 });
 
 //method to create a web socket
-app.ws('/messages', socket => {
+app.ws('/messages', (socket, req) => {
+    console.log("Joining a new client@" + req.connection.remoteAddress)
     sockets.push(socket);
 
     //if client close the connection remove socket from list
