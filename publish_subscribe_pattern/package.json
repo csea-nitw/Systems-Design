@@ -1,0 +1,19 @@
+{
+  "name": "publisher-subscriber-algo-designexpert",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "publisher": "node publisher.js",
+    "subscriber": "node subscriber.js",
+    "server": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-ws": "^4.0.0",
+    "ws": "^7.3.1",
+    "axios": "^0.20.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}

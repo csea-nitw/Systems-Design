@@ -8,8 +8,9 @@ const sockets = {};
 
 app.use(express.json());
 
-app.listen(3001, () => console.log("Listening on port 3001."));
+const SERVER_PORT = process.env.SERVER_PORT ? process.env.SERVER_PORT : 3001;
 
+app.listen(SERVER_PORT, () => console.log(`Listening on port ${SERVER_PORT}.`));
 
 app.post('/:topicID', (req, res) => {
     const {topicID} = req.params;
@@ -27,16 +28,16 @@ app.post('/:topicID', (req, res) => {
 app.ws('/:topicID', (socket, req) =>{
     const {topicID} = req.params;
 
+    console.log(`Subscribed new client on topic ${topicID}`);
+
     if(!sockets[topicID]) sockets[topicID] = [];
     
     const topicSockets = sockets[topicID];
     //adding new created socket to topicSockets
     topicSockets.push(socket);
 
-
     //when socket closes the connection just remove it 
     socket.on('close', () => {
         topicSockets.splice(topicSockets.indexOf(socket), 1);
     });
-
 });
