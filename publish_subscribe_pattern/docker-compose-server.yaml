@@ -1,0 +1,60 @@
+version: "3.8"
+
+services:
+
+  pubsub_server:
+    build: .
+    image: marcellodesales/systemsexpert-publisher-subscriber
+    command: npm run server
+    environment:
+      - SERVER_PORT=3001
+    ports:
+      - "3001:3001"
+    networks:
+      - pubsub
+
+  prices_subscriber_1:
+    build: .
+    image: marcellodesales/systemsexpert-publisher-subscriber
+    command: ["/wait-for-it.sh", "pubsub_server:3001", "--", "npm", "run", "subscriber"] 
+    restart: always
+    environment:
+      - SERVER_HOST=pubsub_server
+      - SERVER_PORT=3001
+      - TOPIC_ID=stock_prices
+    volumes:
+      - "./wait-for-it.sh:/wait-for-it.sh"
+    networks:
+      - pubsub
+
+  prices_subscriber_2:
+    build: .
+    image: marcellodesales/systemsexpert-publisher-subscriber
+    command: ["/wait-for-it.sh", "pubsub_server:3001", "--", "npm", "run", "subscriber"] 
+    restart: always
+    environment:
+      - SERVER_HOST=pubsub_server
+      - SERVER_PORT=3001
+      - TOPIC_ID=stock_prices
+    volumes:
+      - "./wait-for-it.sh:/wait-for-it.sh"
+    networks:
+      - pubsub
+
+  news_subscriber_1:
+    build: .
+    image: marcellodesales/systemsexpert-publisher-subscriber
+    command: ["/wait-for-it.sh", "pubsub_server:3001", "--", "npm", "run", "subscriber"] 
+    restart: always
+    environment:
+      - SERVER_HOST=pubsub_server
+      - SERVER_PORT=3001
+      - TOPIC_ID=news_alert
+    volumes:
+      - "./wait-for-it.sh:/wait-for-it.sh"
+    networks:
+      - pubsub
+
+networks:
+  pubsub:
+    name: pubsub
